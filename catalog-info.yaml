@@ -1,0 +1,48 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "cncfdemo-frontend"
+  links:
+    - url: https://cncfdemo.sam.dsoderlund.consulting
+      title: CI/CD Deployment
+      icon: website
+spec:
+  type: website
+  owner: dsoderlund.consulting
+  lifecycle: experimental
+  subcomponentOf: "cncfdemo"
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "cncfdemo-backend"
+  links:
+    - url: https://cncfdemo.sam.dsoderlund.consulting/api
+      title: CI/CD Deployment
+      icon: service
+spec:
+  type: service
+  owner: dsoderlund.consulting
+  lifecycle: experimental
+  subcomponentOf: "cncfdemo"
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "cncfdemo"
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    argocd/app-selector: "component=cncfdemo"
+    github.com/project-slug: dsoderlund-consulting/cncfdemo
+  links:
+    - url: https://cncfdemo.sam.dsoderlund.consulting
+      title: CI/CD Deployment (frontend)
+      icon: website
+    - url: https://cncfdemo.sam.dsoderlund.consulting/api
+      title: CI/CD Deployment (backend)
+      icon: service
+spec:
+  type: service
+  owner: dsoderlund.consulting
+  lifecycle: experimental
+  system: demo-system
